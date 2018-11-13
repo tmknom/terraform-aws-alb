@@ -8,6 +8,11 @@ variable "subnets" {
   description = "A list of subnet IDs to attach to the LB. At least two subnets in two different Availability Zones must be specified."
 }
 
+variable "vpc_id" {
+  type        = "string"
+  description = "VPC Id to associate with ALB."
+}
+
 variable "internal" {
   default     = false
   type        = "string"
@@ -36,6 +41,24 @@ variable "ip_address_type" {
   default     = "ipv4"
   type        = "string"
   description = "The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 and dualstack."
+}
+
+variable "https_port" {
+  default     = 443
+  type        = "string"
+  description = "The HTTPS port."
+}
+
+variable "http_port" {
+  default     = 80
+  type        = "string"
+  description = "The HTTP port."
+}
+
+variable "ingress_cidr_blocks" {
+  default     = ["0.0.0.0/0"]
+  type        = "list"
+  description = "List of Ingress CIDR blocks."
 }
 
 variable "tags" {
