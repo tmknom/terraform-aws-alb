@@ -61,6 +61,28 @@ resource "aws_lb" "default" {
   tags = "${var.tags}"
 }
 
+# https://www.terraform.io/docs/providers/aws/r/lb_listener.html
+resource "aws_lb_listener" "http" {
+  load_balancer_arn = "${aws_lb.default.arn}"
+  port              = "${var.http_port}"
+  protocol          = "HTTP"
+
+  # When you create a listener, you define actions for the default rule. Default rules can't have conditions.
+  # If no conditions for any of a listener's rules are met, then the action for the default rule is performed.
+  # https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules
+  default_action {
+    # You can use this action to return a 2XX, 4XX, or 5XX response code and an optional message.
+    # https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#fixed-response-actions
+    type = "fixed-response"
+
+    fixed_response {
+      content_type = "${var.fixed_response_content_type}"
+      message_body = "${var.fixed_response_message_body}"
+      status_code  = "${var.fixed_response_status_code}"
+    }
+  }
+}
+
 # NOTE on Security Groups and Security Group Rules:
 # At this time you cannot use a Security Group with in-line rules in conjunction with any Security Group Rule resources.
 # Doing so will cause a conflict of rule settings and will overwrite rules.
