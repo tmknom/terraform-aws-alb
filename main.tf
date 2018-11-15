@@ -48,6 +48,15 @@ resource "aws_lb" "default" {
   # https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html#ip-address-type
   ip_address_type = "${var.ip_address_type}"
 
+  # ALB provides access logs that capture detailed information about requests sent to your load balancer.
+  # Even if access_logs_enabled set false, you need to specify the valid bucket to access_logs_bucket.
+  # https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-access-logs.html
+  access_logs {
+    bucket  = "${var.access_logs_bucket}"
+    prefix  = "${var.access_logs_prefix}"
+    enabled = "${var.access_logs_enabled}"
+  }
+
   # A mapping of tags to assign to the resource.
   tags = "${var.tags}"
 }
