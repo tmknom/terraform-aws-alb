@@ -18,6 +18,14 @@ output "alb_zone_id" {
   value = "${module.alb.alb_zone_id}"
 }
 
+output "http_alb_listener_id" {
+  value = "${module.alb.http_alb_listener_id}"
+}
+
+output "http_alb_listener_arn" {
+  value = "${module.alb.http_alb_listener_arn}"
+}
+
 output "security_group_id" {
   value = "${module.alb.security_group_id}"
 }
