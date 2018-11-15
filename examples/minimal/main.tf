@@ -7,9 +7,7 @@ module "alb" {
 }
 
 module "vpc" {
-  source  = "tmknom/vpc/aws"
-  version = "1.0.0"
-
+  source     = "git::https://github.com/tmknom/terraform-aws-vpc.git?ref=tags/1.0.0"
   cidr_block = "10.255.0.0/16"
   name       = "minimal"
 
