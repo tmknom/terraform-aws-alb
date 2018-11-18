@@ -8,11 +8,64 @@ Terraform module template following [Standard Module Structure](https://www.terr
 
 ## Usage
 
-Named `terraform-<PROVIDER>-<NAME>`. Module repositories must use this three-part name format.
+### Minimal
 
-```sh
-curl -fsSL https://raw.githubusercontent.com/tmknom/terraform-aws-alb/master/install | sh -s terraform-aws-sample
-cd terraform-aws-sample && make install
+```hcl
+module "alb" {
+  source             = "git::https://github.com/tmknom/terraform-aws-alb.git?ref=tags/1.0.0"
+  name               = "minimal"
+  vpc_id             = "${var.vpc_id}"
+  subnets            = ["${var.subnets}"]
+  access_logs_bucket = "s3-lb-log"
+  certificate_arn    = "${var.certificate_arn}"
+}
+```
+
+### Complete
+
+```hcl
+module "alb" {
+  source             = "git::https://github.com/tmknom/terraform-aws-alb.git?ref=tags/1.0.0"
+  name               = "complete"
+  vpc_id             = "${var.vpc_id}"
+  subnets            = ["${var.subnets}"]
+  access_logs_bucket = "s3-lb-log"
+  certificate_arn    = "${var.certificate_arn}"
+
+  internal                    = false
+  idle_timeout                = 120
+  enable_deletion_protection  = false
+  enable_http2                = false
+  ip_address_type             = "ipv4"
+  access_logs_prefix          = "test"
+  access_logs_enabled         = true
+  ssl_policy                  = "ELBSecurityPolicy-2016-08"
+  https_port                  = 443
+  http_port                   = 8080
+  fixed_response_content_type = "text/plain"
+  fixed_response_message_body = "ok"
+  fixed_response_status_code  = "200"
+  ingress_cidr_blocks         = ["0.0.0.0/0"]
+
+  target_group_port                = 8080
+  target_group_protocol            = "HTTP"
+  target_type                      = "ip"
+  deregistration_delay             = 600
+  slow_start                       = 0
+  health_check_path                = "/"
+  health_check_healthy_threshold   = 3
+  health_check_unhealthy_threshold = 3
+  health_check_timeout             = 3
+  health_check_interval            = 60
+  health_check_matcher             = 200
+  health_check_port                = "traffic-port"
+  health_check_protocol            = "HTTP"
+
+  tags = {
+    Name        = "complete"
+    Environment = "prod"
+  }
+}
 ```
 
 ## Examples
