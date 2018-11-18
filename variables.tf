@@ -60,6 +60,18 @@ variable "access_logs_enabled" {
   description = "Boolean to enable / disable access_logs."
 }
 
+variable "ssl_policy" {
+  default     = "ELBSecurityPolicy-2016-08"
+  type        = "string"
+  description = "The name of the SSL Policy for the listener. Required if protocol is HTTPS."
+}
+
+variable "certificate_arn" {
+  default     = ""
+  type        = "string"
+  description = "The ARN of the default SSL server certificate. Exactly one certificate is required if the protocol is HTTPS."
+}
+
 variable "https_port" {
   default     = 443
   type        = "string"
