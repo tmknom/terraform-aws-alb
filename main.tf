@@ -62,6 +62,40 @@ resource "aws_lb" "default" {
 }
 
 # https://www.terraform.io/docs/providers/aws/r/lb_listener.html
+resource "aws_lb_listener" "https" {
+  load_balancer_arn = "${aws_lb.default.arn}"
+  port              = "${var.https_port}"
+  protocol          = "HTTPS"
+
+  # You can choose the security policy that is used for front-end connections.
+  # We recommend the ELBSecurityPolicy-2016-08 policy for general use.
+  # https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
+  ssl_policy = "${var.ssl_policy}"
+
+  # When you create an HTTPS listener, you must specify a default certificate.
+  # You can create an optional certificate list for the listener by adding more certificates.
+  # https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#https-listener-certificates
+  #
+  # If you wish adding more certificates, then use aws_lb_listener_certificate resource.
+  # https://www.terraform.io/docs/providers/aws/r/lb_listener_certificate.html
+  certificate_arn = "${var.certificate_arn}"
+
+  # When you create a listener, you define actions for the default rule. Default rules can't have conditions.
+  # If no conditions for any of a listener's rules are met, then the action for the default rule is performed.
+  # https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules
+  default_action {
+    # You can use this action to return a 2XX, 4XX, or 5XX response code and an optional message.
+    # https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#fixed-response-actions
+    type = "fixed-response"
+
+    fixed_response {
+      content_type = "${var.fixed_response_content_type}"
+      message_body = "${var.fixed_response_message_body}"
+      status_code  = "${var.fixed_response_status_code}"
+    }
+  }
+}
+
 resource "aws_lb_listener" "http" {
   load_balancer_arn = "${aws_lb.default.arn}"
   port              = "${var.http_port}"

@@ -4,6 +4,13 @@ module "alb" {
   vpc_id             = "${module.vpc.vpc_id}"
   subnets            = ["${module.vpc.public_subnet_ids}"]
   access_logs_bucket = "${module.s3_lb_log.s3_bucket_id}"
+  certificate_arn    = "${module.certificate.acm_certificate_arn}"
+}
+
+module "certificate" {
+  source      = "git::https://github.com/tmknom/terraform-aws-acm-certificate.git?ref=tags/1.0.0"
+  domain_name = "${local.domain_name}"
+  zone_id     = "${data.aws_route53_zone.default.id}"
 }
 
 module "vpc" {
@@ -25,6 +32,21 @@ module "s3_access_log" {
   source        = "git::https://github.com/tmknom/terraform-aws-s3-access-log.git?ref=tags/1.0.0"
   name          = "s3-access-log-${data.aws_caller_identity.current.account_id}"
   force_destroy = true
+}
+
+data "aws_route53_zone" "default" {
+  name = "${local.domain_name}."
+}
+
+locals {
+  domain_name         = "${var.domain_name != "" ? var.domain_name : local.default_domain_name}"
+  default_domain_name = "example.com"
+}
+
+variable "domain_name" {
+  default     = ""
+  type        = "string"
+  description = "If TF_VAR_domain_name set in the environment variables, then use that value."
 }
 
 data "aws_caller_identity" "current" {}

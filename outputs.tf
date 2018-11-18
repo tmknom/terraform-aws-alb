@@ -23,6 +23,16 @@ output "alb_zone_id" {
   description = "The canonical hosted zone ID of the load balancer (to be used in a Route 53 Alias record)."
 }
 
+output "https_alb_listener_id" {
+  value       = "${aws_lb_listener.https.id}"
+  description = "The ARN of the HTTPS listener (matches arn)"
+}
+
+output "https_alb_listener_arn" {
+  value       = "${aws_lb_listener.https.arn}"
+  description = "The ARN of the HTTPS listener (matches id)"
+}
+
 output "http_alb_listener_id" {
   value       = "${aws_lb_listener.http.id}"
   description = "The ARN of the HTTP listener (matches arn)"
