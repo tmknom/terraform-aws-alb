@@ -61,6 +61,10 @@ resource "aws_lb" "default" {
   tags = "${var.tags}"
 }
 
+# When you create a listener, you define actions for the default rule. Default rules can't have conditions.
+# If no conditions for any of a listener's rules are met, then the action for the default rule is performed.
+# https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules
+#
 # https://www.terraform.io/docs/providers/aws/r/lb_listener.html
 resource "aws_lb_listener" "https" {
   load_balancer_arn = "${aws_lb.default.arn}"
@@ -80,9 +84,6 @@ resource "aws_lb_listener" "https" {
   # https://www.terraform.io/docs/providers/aws/r/lb_listener_certificate.html
   certificate_arn = "${var.certificate_arn}"
 
-  # When you create a listener, you define actions for the default rule. Default rules can't have conditions.
-  # If no conditions for any of a listener's rules are met, then the action for the default rule is performed.
-  # https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules
   default_action {
     # You can use this action to return a 2XX, 4XX, or 5XX response code and an optional message.
     # https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#fixed-response-actions
@@ -101,9 +102,6 @@ resource "aws_lb_listener" "http" {
   port              = "${var.http_port}"
   protocol          = "HTTP"
 
-  # When you create a listener, you define actions for the default rule. Default rules can't have conditions.
-  # If no conditions for any of a listener's rules are met, then the action for the default rule is performed.
-  # https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules
   default_action {
     # You can use this action to return a 2XX, 4XX, or 5XX response code and an optional message.
     # https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#fixed-response-actions
