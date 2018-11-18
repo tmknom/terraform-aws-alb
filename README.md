@@ -6,6 +6,20 @@
 
 Terraform module which creates ALB resources on AWS.
 
+## Description
+
+Provision [ALB](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html),
+[ALB Listeners](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html),
+[Target Groups](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html) and
+[Security Groups](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-update-security-groups.html).
+
+This module provides recommended settings:
+
+- Enable HTTPS
+- Enable HTTP/2
+- Enable Access Logging
+- Use AWS recommended SSL Policy
+
 ## Usage
 
 ### Minimal
