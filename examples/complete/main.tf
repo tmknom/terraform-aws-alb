@@ -21,6 +21,20 @@ module "alb" {
   fixed_response_status_code  = "200"
   ingress_cidr_blocks         = ["0.0.0.0/0"]
 
+  target_group_port                = 8080
+  target_group_protocol            = "HTTP"
+  target_type                      = "ip"
+  deregistration_delay             = 600
+  slow_start                       = 0
+  health_check_path                = "/"
+  health_check_healthy_threshold   = 3
+  health_check_unhealthy_threshold = 3
+  health_check_timeout             = 3
+  health_check_interval            = 60
+  health_check_matcher             = 200
+  health_check_port                = "traffic-port"
+  health_check_protocol            = "HTTP"
+
   tags = {
     Name        = "complete"
     Environment = "prod"
