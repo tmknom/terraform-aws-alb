@@ -34,6 +34,22 @@ output "http_alb_listener_arn" {
   value = "${module.alb.http_alb_listener_arn}"
 }
 
+output "alb_target_group_id" {
+  value = "${module.alb.alb_target_group_id}"
+}
+
+output "alb_target_group_arn" {
+  value = "${module.alb.alb_target_group_arn}"
+}
+
+output "alb_target_group_arn_suffix" {
+  value = "${module.alb.alb_target_group_arn_suffix}"
+}
+
+output "alb_target_group_name" {
+  value = "${module.alb.alb_target_group_name}"
+}
+
 output "security_group_id" {
   value = "${module.alb.security_group_id}"
 }

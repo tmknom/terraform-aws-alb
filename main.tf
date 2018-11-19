@@ -115,6 +115,84 @@ resource "aws_lb_listener" "http" {
   }
 }
 
+resource "aws_lb_target_group" "default" {
+  name   = "${var.name}"
+  vpc_id = "${var.vpc_id}"
+
+  # The port on which the targets receive traffic.
+  # This port is used unless you specify a port override when registering the target.
+  # https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_CreateTargetGroup.html
+  port = "${var.target_group_port}"
+
+  # The protocol to use for routing traffic to the targets.
+  # For Application Load Balancers, the supported protocols are HTTP and HTTPS.
+  # https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_CreateTargetGroup.html
+  protocol = "${var.target_group_protocol}"
+
+  # The type of target that you must specify when registering targets with this target group.
+  # The possible values are instance (targets are specified by instance ID) or ip (targets are specified by IP address).
+  # You can't specify targets for a target group using both instance IDs and IP addresses.
+  #
+  # If the target type is ip, specify IP addresses from the subnets of the virtual private cloud (VPC) for the target group,
+  # the RFC 1918 range (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and the RFC 6598 range (100.64.0.0/10).
+  # You can't specify publicly routable IP addresses.
+  #
+  # https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#target-type
+  target_type = "${var.target_type}"
+
+  # The amount of time for Elastic Load Balancing to wait before deregistering a target.
+  # The range is 0–3600 seconds.
+  # https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#target-group-attributes
+  deregistration_delay = "${var.deregistration_delay}"
+
+  # The time period, in seconds, during which the load balancer sends
+  # a newly registered target a linearly increasing share of the traffic to the target group.
+  # The range is 30–900 seconds (15 minutes).
+  # https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#target-group-attributes
+  slow_start = "${var.slow_start}"
+
+  # Your Application Load Balancer periodically sends requests to its registered targets to test their status.
+  # These tests are called health checks.
+  # https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html
+  health_check {
+    # The ping path that is the destination on the targets for health checks.
+    # Specify a valid URI (protocol://hostname/path?query).
+    path = "${var.health_check_path}"
+
+    # The number of consecutive successful health checks required before considering an unhealthy target healthy.
+    # The range is 2–10.
+    healthy_threshold = "${var.health_check_healthy_threshold}"
+
+    # The number of consecutive failed health checks required before considering a target unhealthy.
+    # The range is 2–10.
+    unhealthy_threshold = "${var.health_check_unhealthy_threshold}"
+
+    # The amount of time, in seconds, during which no response from a target means a failed health check.
+    # The range is 2–60 seconds.
+    timeout = "${var.health_check_timeout}"
+
+    # The approximate amount of time, in seconds, between health checks of an individual target.
+    # The range is 5–300 seconds.
+    interval = "${var.health_check_interval}"
+
+    # The HTTP codes to use when checking for a successful response from a target.
+    # You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299").
+    matcher = "${var.health_check_matcher}"
+
+    # The port the load balancer uses when performing health checks on targets.
+    # The default is to use the port on which each target receives traffic from the load balancer.
+    # Valid values are either ports 1-65536, or traffic-port.
+    port = "${var.health_check_port}"
+
+    # The protocol the load balancer uses when performing health checks on targets.
+    # The possible protocols are HTTP and HTTPS.
+    protocol = "${var.health_check_protocol}"
+  }
+
+  # A mapping of tags to assign to the resource.
+  tags = "${var.tags}"
+}
+
 # NOTE on Security Groups and Security Group Rules:
 # At this time you cannot use a Security Group with in-line rules in conjunction with any Security Group Rule resources.
 # Doing so will cause a conflict of rule settings and will overwrite rules.
