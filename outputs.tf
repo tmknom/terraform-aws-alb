@@ -43,6 +43,26 @@ output "http_alb_listener_arn" {
   description = "The ARN of the HTTP listener (matches id)"
 }
 
+output "alb_target_group_id" {
+  value       = "${aws_lb_target_group.default.id}"
+  description = "The ARN of the Target Group (matches arn)"
+}
+
+output "alb_target_group_arn" {
+  value       = "${aws_lb_target_group.default.arn}"
+  description = "The ARN of the Target Group (matches id)"
+}
+
+output "alb_target_group_arn_suffix" {
+  value       = "${aws_lb_target_group.default.arn_suffix}"
+  description = "The ARN suffix for use with CloudWatch Metrics."
+}
+
+output "alb_target_group_name" {
+  value       = "${aws_lb_target_group.default.name}"
+  description = "The name of the Target Group."
+}
+
 output "security_group_id" {
   value       = "${aws_security_group.default.id}"
   description = "The ID of the security group."
