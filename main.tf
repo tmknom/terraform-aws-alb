@@ -98,6 +98,8 @@ resource "aws_lb_listener" "https" {
 }
 
 resource "aws_lb_listener" "http" {
+  count = "${var.enable_http_listener ? 1 : 0}"
+
   load_balancer_arn = "${aws_lb.default.arn}"
   port              = "${var.http_port}"
   protocol          = "HTTP"
