@@ -115,7 +115,7 @@ variable "target_group_protocol" {
 }
 
 variable "target_type" {
-  default     = "instance"
+  default     = "ip"
   type        = "string"
   description = "The type of target that you must specify when registering targets with this target group. The possible values are instance or ip."
 }
