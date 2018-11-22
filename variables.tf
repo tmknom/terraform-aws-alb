@@ -60,6 +60,12 @@ variable "access_logs_enabled" {
   description = "Boolean to enable / disable access_logs."
 }
 
+variable "enable_https_listener" {
+  default     = true
+  type        = "string"
+  description = "If true, the HTTPS listener will be created."
+}
+
 variable "enable_http_listener" {
   default     = true
   type        = "string"

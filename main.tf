@@ -67,6 +67,8 @@ resource "aws_lb" "default" {
 #
 # https://www.terraform.io/docs/providers/aws/r/lb_listener.html
 resource "aws_lb_listener" "https" {
+  count = "${var.enable_https_listener ? 1 : 0}"
+
   load_balancer_arn = "${aws_lb.default.arn}"
   port              = "${var.https_port}"
   protocol          = "HTTPS"
