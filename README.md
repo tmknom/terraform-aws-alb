@@ -18,6 +18,7 @@ This module provides recommended settings:
 - Enable HTTPS
 - Enable HTTP/2
 - Enable Access Logging
+- Enable Deletion Protection
 - Use AWS recommended SSL Policy
 
 ## Usage
