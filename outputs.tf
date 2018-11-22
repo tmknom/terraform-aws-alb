@@ -24,12 +24,12 @@ output "alb_zone_id" {
 }
 
 output "https_alb_listener_id" {
-  value       = "${aws_lb_listener.https.id}"
+  value       = "${aws_lb_listener.https.*.id}"
   description = "The ARN of the HTTPS listener (matches arn)"
 }
 
 output "https_alb_listener_arn" {
-  value       = "${aws_lb_listener.https.arn}"
+  value       = "${aws_lb_listener.https.*.arn}"
   description = "The ARN of the HTTPS listener (matches id)"
 }
 
