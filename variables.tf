@@ -60,6 +60,12 @@ variable "access_logs_enabled" {
   description = "Boolean to enable / disable access_logs."
 }
 
+variable "enable_http_listener" {
+  default     = true
+  type        = "string"
+  description = "If true, the HTTP listener will be created."
+}
+
 variable "ssl_policy" {
   default     = "ELBSecurityPolicy-2016-08"
   type        = "string"

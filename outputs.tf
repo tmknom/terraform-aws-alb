@@ -34,12 +34,12 @@ output "https_alb_listener_arn" {
 }
 
 output "http_alb_listener_id" {
-  value       = "${aws_lb_listener.http.id}"
+  value       = "${aws_lb_listener.http.*.id}"
   description = "The ARN of the HTTP listener (matches arn)"
 }
 
 output "http_alb_listener_arn" {
-  value       = "${aws_lb_listener.http.arn}"
+  value       = "${aws_lb_listener.http.*.arn}"
   description = "The ARN of the HTTP listener (matches id)"
 }
 
