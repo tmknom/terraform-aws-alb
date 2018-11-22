@@ -18,6 +18,7 @@ This module provides recommended settings:
 - Enable HTTPS
 - Enable HTTP/2
 - Enable Access Logging
+- Enable Deletion Protection
 - Use AWS recommended SSL Policy
 
 ## Usage
@@ -102,7 +103,7 @@ module "alb" {
 | access_logs_prefix               | The S3 bucket prefix. Logs are stored in the root if not configured.                                                                        | string |           `` | no           |
 | certificate_arn                  | The ARN of the default SSL server certificate. Exactly one certificate is required if the protocol is HTTPS.                                | string |           `` | no           |
 | deregistration_delay             | The amount time for the load balancer to wait before changing the state of a deregistering target from draining to unused.                  | string |            `300`            |    no    |
-| enable_deletion_protection       | If true, deletion of the load balancer will be disabled via the AWS API.                                                                    | string |           `false`           |    no    |
+| enable_deletion_protection       | If true, deletion of the load balancer will be disabled via the AWS API.                                                                    | string |           `true`            |    no    |
 | enable_http2                     | Indicates whether HTTP/2 is enabled in application load balancers.                                                                          | string |           `true`            |    no    |
 | enable_http_listener             | If true, the HTTP listener will be created.                                                                                                 | string |           `true`            |    no    |
 | enable_https_listener            | If true, the HTTPS listener will be created.                                                                                                | string |           `true`            |    no    |
