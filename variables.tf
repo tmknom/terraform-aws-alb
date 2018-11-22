@@ -31,7 +31,7 @@ variable "idle_timeout" {
 }
 
 variable "enable_deletion_protection" {
-  default     = false
+  default     = true
   type        = "string"
   description = "If true, deletion of the load balancer will be disabled via the AWS API."
 }
