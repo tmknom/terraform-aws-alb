@@ -46,6 +46,9 @@ module "alb" {
   access_logs_bucket = "s3-lb-log"
   certificate_arn    = "${var.certificate_arn}"
 
+  enable_https_listener = true
+  enable_http_listener  = true
+
   internal                    = false
   idle_timeout                = 120
   enable_deletion_protection  = false
@@ -101,6 +104,8 @@ module "alb" {
 | deregistration_delay             | The amount time for the load balancer to wait before changing the state of a deregistering target from draining to unused.                  | string |            `300`            |    no    |
 | enable_deletion_protection       | If true, deletion of the load balancer will be disabled via the AWS API.                                                                    | string |           `false`           |    no    |
 | enable_http2                     | Indicates whether HTTP/2 is enabled in application load balancers.                                                                          | string |           `true`            |    no    |
+| enable_http_listener             | If true, the HTTP listener will be created.                                                                                                 | string |           `true`            |    no    |
+| enable_https_listener            | If true, the HTTPS listener will be created.                                                                                                | string |           `true`            |    no    |
 | fixed_response_content_type      | The content type. Valid values are text/plain, text/css, text/html, application/javascript and application/json.                            | string |        `text/plain`         |    no    |
 | fixed_response_message_body      | The message body.                                                                                                                           | string |       `404 Not Found`       |    no    |
 | fixed_response_status_code       | The HTTP response code. Valid values are 2XX, 4XX, or 5XX.                                                                                  | string |            `404`            |    no    |
@@ -123,7 +128,7 @@ module "alb" {
 | tags                             | A mapping of tags to assign to all resources.                                                                                               |  map   |            `{}`             |    no    |
 | target_group_port                | The port on which targets receive traffic, unless overridden when registering a specific target.                                            | string |            `80`             |    no    |
 | target_group_protocol            | The protocol to use for routing traffic to the targets. Should be one of HTTP or HTTPS.                                                     | string |           `HTTP`            |    no    |
-| target_type                      | The type of target that you must specify when registering targets with this target group. The possible values are instance or ip.           | string |         `instance`          |    no    |
+| target_type                      | The type of target that you must specify when registering targets with this target group. The possible values are instance or ip.           | string |            `ip`             |    no    |
 
 ## Outputs
 
