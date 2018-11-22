@@ -210,6 +210,8 @@ resource "aws_security_group" "default" {
 
 # https://www.terraform.io/docs/providers/aws/r/security_group_rule.html
 resource "aws_security_group_rule" "ingress_https" {
+  count = "${var.enable_https_listener ? 1 : 0}"
+
   type              = "ingress"
   from_port         = "${var.https_port}"
   to_port           = "${var.https_port}"
@@ -219,6 +221,8 @@ resource "aws_security_group_rule" "ingress_https" {
 }
 
 resource "aws_security_group_rule" "ingress_http" {
+  count = "${var.enable_http_listener ? 1 : 0}"
+
   type              = "ingress"
   from_port         = "${var.http_port}"
   to_port           = "${var.http_port}"
