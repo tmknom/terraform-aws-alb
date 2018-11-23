@@ -34,6 +34,14 @@ output "http_alb_listener_arn" {
   value = "${module.alb.http_alb_listener_arn}"
 }
 
+output "redirect_http_to_https_alb_listener_id" {
+  value = "${module.alb.redirect_http_to_https_alb_listener_id}"
+}
+
+output "redirect_http_to_https_alb_listener_arn" {
+  value = "${module.alb.redirect_http_to_https_alb_listener_arn}"
+}
+
 output "alb_target_group_id" {
   value = "${module.alb.alb_target_group_id}"
 }
