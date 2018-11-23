@@ -111,7 +111,7 @@ module "alb" {
 | enable_http2                     | Indicates whether HTTP/2 is enabled in application load balancers.                                                                          | string |           `true`            |    no    |
 | enable_http_listener             | If true, the HTTP listener will be created.                                                                                                 | string |           `true`            |    no    |
 | enable_https_listener            | If true, the HTTPS listener will be created.                                                                                                | string |           `true`            |    no    |
-| enable_redirect_http_to_https    | If true, the HTTP listener of HTTPS redirection will be created.                                                                            | string |           `true`            |    no    |
+| enable_redirect_http_to_https    | If true, the HTTP listener of HTTPS redirect will be created.                                                                               | string |           `true`            |    no    |
 | fixed_response_content_type      | The content type. Valid values are text/plain, text/css, text/html, application/javascript and application/json.                            | string |        `text/plain`         |    no    |
 | fixed_response_message_body      | The message body.                                                                                                                           | string |       `404 Not Found`       |    no    |
 | fixed_response_status_code       | The HTTP response code. Valid values are 2XX, 4XX, or 5XX.                                                                                  | string |            `404`            |    no    |
@@ -153,8 +153,8 @@ module "alb" {
 | http_alb_listener_id                    | The ARN of the HTTP listener (matches arn)                                                 |
 | https_alb_listener_arn                  | The ARN of the HTTPS listener (matches id)                                                 |
 | https_alb_listener_id                   | The ARN of the HTTPS listener (matches arn)                                                |
-| redirect_http_to_https_alb_listener_arn | The ARN of the HTTP listener of HTTPS redirection (matches id)                             |
-| redirect_http_to_https_alb_listener_id  | The ARN of the HTTP listener of HTTPS redirection (matches arn)                            |
+| redirect_http_to_https_alb_listener_arn | The ARN of the HTTP listener of HTTPS redirect (matches id)                                |
+| redirect_http_to_https_alb_listener_id  | The ARN of the HTTP listener of HTTPS redirect (matches arn)                               |
 | security_group_arn                      | The ARN of the security group.                                                             |
 | security_group_description              | The description of the security group.                                                     |
 | security_group_egress                   | The egress rules.                                                                          |
