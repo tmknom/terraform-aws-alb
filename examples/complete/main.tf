@@ -18,14 +18,14 @@ module "alb" {
   access_logs_prefix          = "test"
   access_logs_enabled         = true
   ssl_policy                  = "ELBSecurityPolicy-2016-08"
-  https_port                  = 10443
-  http_port                   = 10080
+  https_port                  = 443
+  http_port                   = 80
   fixed_response_content_type = "text/plain"
   fixed_response_message_body = "ok"
   fixed_response_status_code  = "200"
   ingress_cidr_blocks         = ["0.0.0.0/0"]
 
-  target_group_port                = 8080
+  target_group_port                = 80
   target_group_protocol            = "HTTP"
   target_type                      = "ip"
   deregistration_delay             = 600
