@@ -100,7 +100,7 @@ resource "aws_lb_listener" "https" {
 }
 
 resource "aws_lb_listener" "http" {
-  count = "${var.enable_http_listener ? 1 : 0}"
+  count = "${var.enable_http_listener && !(var.enable_redirect_http_to_https) ? 1 : 0}"
 
   load_balancer_arn = "${aws_lb.default.arn}"
   port              = "${var.http_port}"
@@ -115,6 +115,27 @@ resource "aws_lb_listener" "http" {
       content_type = "${var.fixed_response_content_type}"
       message_body = "${var.fixed_response_message_body}"
       status_code  = "${var.fixed_response_status_code}"
+    }
+  }
+}
+
+resource "aws_lb_listener" "redirect_http_to_https" {
+  count = "${var.enable_http_listener && var.enable_https_listener && var.enable_redirect_http_to_https ? 1 : 0}"
+
+  load_balancer_arn = "${aws_lb.default.arn}"
+  port              = "${var.http_port}"
+  protocol          = "HTTP"
+
+  default_action {
+    # You can use redirect actions to redirect client requests from one URL to another.
+    # You can configure redirects as either temporary (HTTP 302) or permanent (HTTP 301) based on your needs.
+    # https://www.terraform.io/docs/providers/aws/r/lb_listener.html#redirect-action
+    type = "redirect"
+
+    redirect {
+      port        = "${var.https_port}"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
     }
   }
 }
