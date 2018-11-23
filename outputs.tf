@@ -24,32 +24,32 @@ output "alb_zone_id" {
 }
 
 output "https_alb_listener_id" {
-  value       = "${aws_lb_listener.https.*.id}"
+  value       = "${element(concat(aws_lb_listener.https.*.id, list("")), 0)}"
   description = "The ARN of the HTTPS listener (matches arn)"
 }
 
 output "https_alb_listener_arn" {
-  value       = "${aws_lb_listener.https.*.arn}"
+  value       = "${element(concat(aws_lb_listener.https.*.arn, list("")), 0)}"
   description = "The ARN of the HTTPS listener (matches id)"
 }
 
 output "http_alb_listener_id" {
-  value       = "${aws_lb_listener.http.*.id}"
+  value       = "${element(concat(aws_lb_listener.http.*.id, list("")), 0)}"
   description = "The ARN of the HTTP listener (matches arn)"
 }
 
 output "http_alb_listener_arn" {
-  value       = "${aws_lb_listener.http.*.arn}"
+  value       = "${element(concat(aws_lb_listener.http.*.arn, list("")), 0)}"
   description = "The ARN of the HTTP listener (matches id)"
 }
 
 output "redirect_http_to_https_alb_listener_id" {
-  value       = "${aws_lb_listener.redirect_http_to_https.*.id}"
+  value       = "${element(concat(aws_lb_listener.redirect_http_to_https.*.id, list("")), 0)}"
   description = "The ARN of the HTTP listener of HTTPS redirection (matches arn)"
 }
 
 output "redirect_http_to_https_alb_listener_arn" {
-  value       = "${aws_lb_listener.redirect_http_to_https.*.arn}"
+  value       = "${element(concat(aws_lb_listener.redirect_http_to_https.*.arn, list("")), 0)}"
   description = "The ARN of the HTTP listener of HTTPS redirection (matches id)"
 }
 
