@@ -92,6 +92,8 @@ module "alb" {
 
 - [Minimal](https://github.com/tmknom/terraform-aws-alb/tree/master/examples/minimal)
 - [Complete](https://github.com/tmknom/terraform-aws-alb/tree/master/examples/complete)
+- [Only HTTPS](https://github.com/tmknom/terraform-aws-alb/tree/master/examples/only_https)
+- [Only HTTP](https://github.com/tmknom/terraform-aws-alb/tree/master/examples/only_http)
 
 ## Inputs
 
