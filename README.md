@@ -206,10 +206,16 @@ lint                           Lint code
 release                        Release GitHub and Terraform Module Registry
 terraform-apply-complete       Run terraform apply examples/complete
 terraform-apply-minimal        Run terraform apply examples/minimal
+terraform-apply-only-http      Run terraform apply examples/only_http
+terraform-apply-only-https     Run terraform apply examples/only_https
 terraform-destroy-complete     Run terraform destroy examples/complete
 terraform-destroy-minimal      Run terraform destroy examples/minimal
+terraform-destroy-only-http    Run terraform destroy examples/only_http
+terraform-destroy-only-https   Run terraform destroy examples/only_https
 terraform-plan-complete        Run terraform plan examples/complete
 terraform-plan-minimal         Run terraform plan examples/minimal
+terraform-plan-only-http       Run terraform plan examples/only_http
+terraform-plan-only-https      Run terraform plan examples/only_https
 upgrade                        Upgrade makefile
 ```
 
