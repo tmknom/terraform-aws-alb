@@ -1,6 +1,6 @@
 module "alb" {
   source             = "../../"
-  name               = "only-http"
+  name               = "example"
   vpc_id             = "${module.vpc.vpc_id}"
   subnets            = ["${module.vpc.public_subnet_ids}"]
   access_logs_bucket = "${module.s3_lb_log.s3_bucket_id}"
