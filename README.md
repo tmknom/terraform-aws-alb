@@ -48,9 +48,9 @@ module "alb" {
   access_logs_bucket = "s3-lb-log"
   certificate_arn    = "${var.certificate_arn}"
 
-  enable_https_listener         = true
-  enable_http_listener          = true
-  enable_redirect_http_to_https = true
+  enable_https_listener                  = true
+  enable_http_listener                   = true
+  enable_redirect_http_to_https_listener = true
 
   internal                    = false
   idle_timeout                = 120
@@ -97,44 +97,44 @@ module "alb" {
 
 ## Inputs
 
-| Name                             | Description                                                                                                                                 |  Type  |           Default           | Required |
-| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | :----: | :-------------------------: | :------: |
-| access_logs_bucket               | The S3 bucket name to store the logs in. Even if access_logs_enabled set false, you need to specify the valid bucket to access_logs_bucket. | string |              -              |   yes    |
-| name                             | The name of the LB. This name must be unique within your AWS account.                                                                       | string |              -              |   yes    |
-| subnets                          | A list of subnet IDs to attach to the LB. At least two subnets in two different Availability Zones must be specified.                       |  list  |              -              |   yes    |
-| vpc_id                           | VPC Id to associate with ALB.                                                                                                               | string |              -              |   yes    |
-| access_logs_enabled              | Boolean to enable / disable access_logs.                                                                                                    | string |           `true`            |    no    |
-| access_logs_prefix               | The S3 bucket prefix. Logs are stored in the root if not configured.                                                                        | string |           `` | no           |
-| certificate_arn                  | The ARN of the default SSL server certificate. Exactly one certificate is required if the protocol is HTTPS.                                | string |           `` | no           |
-| deregistration_delay             | The amount time for the load balancer to wait before changing the state of a deregistering target from draining to unused.                  | string |            `300`            |    no    |
-| enable_deletion_protection       | If true, deletion of the load balancer will be disabled via the AWS API.                                                                    | string |           `true`            |    no    |
-| enable_http2                     | Indicates whether HTTP/2 is enabled in application load balancers.                                                                          | string |           `true`            |    no    |
-| enable_http_listener             | If true, the HTTP listener will be created.                                                                                                 | string |           `true`            |    no    |
-| enable_https_listener            | If true, the HTTPS listener will be created.                                                                                                | string |           `true`            |    no    |
-| enable_redirect_http_to_https    | If true, the HTTP listener of HTTPS redirect will be created.                                                                               | string |           `true`            |    no    |
-| fixed_response_content_type      | The content type. Valid values are text/plain, text/css, text/html, application/javascript and application/json.                            | string |        `text/plain`         |    no    |
-| fixed_response_message_body      | The message body.                                                                                                                           | string |       `404 Not Found`       |    no    |
-| fixed_response_status_code       | The HTTP response code. Valid values are 2XX, 4XX, or 5XX.                                                                                  | string |            `404`            |    no    |
-| health_check_healthy_threshold   | The number of consecutive health checks successes required before considering an unhealthy target healthy.                                  | string |             `5`             |    no    |
-| health_check_interval            | The approximate amount of time, in seconds, between health checks of an individual target.                                                  | string |            `30`             |    no    |
-| health_check_matcher             | The HTTP codes to use when checking for a successful response from a target.                                                                | string |            `200`            |    no    |
-| health_check_path                | The destination for the health check request.                                                                                               | string |             `/`             |    no    |
-| health_check_port                | The port to use to connect with the target.                                                                                                 | string |       `traffic-port`        |    no    |
-| health_check_protocol            | The protocol to use to connect with the target.                                                                                             | string |           `HTTP`            |    no    |
-| health_check_timeout             | The amount of time, in seconds, during which no response means a failed health check.                                                       | string |             `5`             |    no    |
-| health_check_unhealthy_threshold | The number of consecutive health check failures required before considering the target unhealthy.                                           | string |             `2`             |    no    |
-| http_port                        | The HTTP port.                                                                                                                              | string |            `80`             |    no    |
-| https_port                       | The HTTPS port.                                                                                                                             | string |            `443`            |    no    |
-| idle_timeout                     | The time in seconds that the connection is allowed to be idle.                                                                              | string |            `60`             |    no    |
-| ingress_cidr_blocks              | List of Ingress CIDR blocks.                                                                                                                |  list  |      `[ "0.0.0.0/0" ]`      |    no    |
-| internal                         | If true, the LB will be internal.                                                                                                           | string |           `false`           |    no    |
-| ip_address_type                  | The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 and dualstack.                            | string |           `ipv4`            |    no    |
-| slow_start                       | The amount time for targets to warm up before the load balancer sends them a full share of requests.                                        | string |             `0`             |    no    |
-| ssl_policy                       | The name of the SSL Policy for the listener. Required if protocol is HTTPS.                                                                 | string | `ELBSecurityPolicy-2016-08` |    no    |
-| tags                             | A mapping of tags to assign to all resources.                                                                                               |  map   |            `{}`             |    no    |
-| target_group_port                | The port on which targets receive traffic, unless overridden when registering a specific target.                                            | string |            `80`             |    no    |
-| target_group_protocol            | The protocol to use for routing traffic to the targets. Should be one of HTTP or HTTPS.                                                     | string |           `HTTP`            |    no    |
-| target_type                      | The type of target that you must specify when registering targets with this target group. The possible values are instance or ip.           | string |            `ip`             |    no    |
+| Name                                   | Description                                                                                                                                 |  Type  |           Default           | Required |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | :----: | :-------------------------: | :------: |
+| access_logs_bucket                     | The S3 bucket name to store the logs in. Even if access_logs_enabled set false, you need to specify the valid bucket to access_logs_bucket. | string |              -              |   yes    |
+| name                                   | The name of the LB. This name must be unique within your AWS account.                                                                       | string |              -              |   yes    |
+| subnets                                | A list of subnet IDs to attach to the LB. At least two subnets in two different Availability Zones must be specified.                       |  list  |              -              |   yes    |
+| vpc_id                                 | VPC Id to associate with ALB.                                                                                                               | string |              -              |   yes    |
+| access_logs_enabled                    | Boolean to enable / disable access_logs.                                                                                                    | string |           `true`            |    no    |
+| access_logs_prefix                     | The S3 bucket prefix. Logs are stored in the root if not configured.                                                                        | string |           `` | no           |
+| certificate_arn                        | The ARN of the default SSL server certificate. Exactly one certificate is required if the protocol is HTTPS.                                | string |           `` | no           |
+| deregistration_delay                   | The amount time for the load balancer to wait before changing the state of a deregistering target from draining to unused.                  | string |            `300`            |    no    |
+| enable_deletion_protection             | If true, deletion of the load balancer will be disabled via the AWS API.                                                                    | string |           `true`            |    no    |
+| enable_http2                           | Indicates whether HTTP/2 is enabled in application load balancers.                                                                          | string |           `true`            |    no    |
+| enable_http_listener                   | If true, the HTTP listener will be created.                                                                                                 | string |           `true`            |    no    |
+| enable_https_listener                  | If true, the HTTPS listener will be created.                                                                                                | string |           `true`            |    no    |
+| enable_redirect_http_to_https_listener | If true, the HTTP listener of HTTPS redirect will be created.                                                                               | string |           `true`            |    no    |
+| fixed_response_content_type            | The content type. Valid values are text/plain, text/css, text/html, application/javascript and application/json.                            | string |        `text/plain`         |    no    |
+| fixed_response_message_body            | The message body.                                                                                                                           | string |       `404 Not Found`       |    no    |
+| fixed_response_status_code             | The HTTP response code. Valid values are 2XX, 4XX, or 5XX.                                                                                  | string |            `404`            |    no    |
+| health_check_healthy_threshold         | The number of consecutive health checks successes required before considering an unhealthy target healthy.                                  | string |             `5`             |    no    |
+| health_check_interval                  | The approximate amount of time, in seconds, between health checks of an individual target.                                                  | string |            `30`             |    no    |
+| health_check_matcher                   | The HTTP codes to use when checking for a successful response from a target.                                                                | string |            `200`            |    no    |
+| health_check_path                      | The destination for the health check request.                                                                                               | string |             `/`             |    no    |
+| health_check_port                      | The port to use to connect with the target.                                                                                                 | string |       `traffic-port`        |    no    |
+| health_check_protocol                  | The protocol to use to connect with the target.                                                                                             | string |           `HTTP`            |    no    |
+| health_check_timeout                   | The amount of time, in seconds, during which no response means a failed health check.                                                       | string |             `5`             |    no    |
+| health_check_unhealthy_threshold       | The number of consecutive health check failures required before considering the target unhealthy.                                           | string |             `2`             |    no    |
+| http_port                              | The HTTP port.                                                                                                                              | string |            `80`             |    no    |
+| https_port                             | The HTTPS port.                                                                                                                             | string |            `443`            |    no    |
+| idle_timeout                           | The time in seconds that the connection is allowed to be idle.                                                                              | string |            `60`             |    no    |
+| ingress_cidr_blocks                    | List of Ingress CIDR blocks.                                                                                                                |  list  |      `[ "0.0.0.0/0" ]`      |    no    |
+| internal                               | If true, the LB will be internal.                                                                                                           | string |           `false`           |    no    |
+| ip_address_type                        | The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 and dualstack.                            | string |           `ipv4`            |    no    |
+| slow_start                             | The amount time for targets to warm up before the load balancer sends them a full share of requests.                                        | string |             `0`             |    no    |
+| ssl_policy                             | The name of the SSL Policy for the listener. Required if protocol is HTTPS.                                                                 | string | `ELBSecurityPolicy-2016-08` |    no    |
+| tags                                   | A mapping of tags to assign to all resources.                                                                                               |  map   |            `{}`             |    no    |
+| target_group_port                      | The port on which targets receive traffic, unless overridden when registering a specific target.                                            | string |            `80`             |    no    |
+| target_group_protocol                  | The protocol to use for routing traffic to the targets. Should be one of HTTP or HTTPS.                                                     | string |           `HTTP`            |    no    |
+| target_type                            | The type of target that you must specify when registering targets with this target group. The possible values are instance or ip.           | string |            `ip`             |    no    |
 
 ## Outputs
 
