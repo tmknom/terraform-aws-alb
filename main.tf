@@ -100,7 +100,7 @@ resource "aws_lb_listener" "https" {
 }
 
 resource "aws_lb_listener" "http" {
-  count = "${var.enable_http_listener && !(var.enable_https_listener && var.enable_redirect_http_to_https) ? 1 : 0}"
+  count = "${var.enable_http_listener && !(var.enable_https_listener && var.enable_redirect_http_to_https_listener) ? 1 : 0}"
 
   load_balancer_arn = "${aws_lb.default.arn}"
   port              = "${var.http_port}"
@@ -120,7 +120,7 @@ resource "aws_lb_listener" "http" {
 }
 
 resource "aws_lb_listener" "redirect_http_to_https" {
-  count = "${var.enable_http_listener && (var.enable_https_listener && var.enable_redirect_http_to_https) ? 1 : 0}"
+  count = "${var.enable_http_listener && (var.enable_https_listener && var.enable_redirect_http_to_https_listener) ? 1 : 0}"
 
   load_balancer_arn = "${aws_lb.default.arn}"
   port              = "${var.http_port}"
