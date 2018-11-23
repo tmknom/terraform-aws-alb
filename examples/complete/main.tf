@@ -8,6 +8,7 @@ module "alb" {
 
   enable_https_listener = true
   enable_http_listener  = true
+  enable_redirect_http_to_https = true
 
   internal                    = false
   idle_timeout                = 120
