@@ -6,9 +6,9 @@ module "alb" {
   access_logs_bucket = "${module.s3_lb_log.s3_bucket_id}"
   certificate_arn    = "${module.certificate.acm_certificate_arn}"
 
-  enable_https_listener         = true
-  enable_http_listener          = true
-  enable_redirect_http_to_https = true
+  enable_https_listener                  = true
+  enable_http_listener                   = true
+  enable_redirect_http_to_https_listener = true
 
   internal                    = false
   idle_timeout                = 120

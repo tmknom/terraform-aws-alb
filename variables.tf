@@ -72,7 +72,7 @@ variable "enable_http_listener" {
   description = "If true, the HTTP listener will be created."
 }
 
-variable "enable_redirect_http_to_https" {
+variable "enable_redirect_http_to_https_listener" {
   default     = true
   type        = "string"
   description = "If true, the HTTP listener of HTTPS redirect will be created."
