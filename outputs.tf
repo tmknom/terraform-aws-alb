@@ -43,6 +43,16 @@ output "http_alb_listener_arn" {
   description = "The ARN of the HTTP listener (matches id)"
 }
 
+output "redirect_http_to_https_alb_listener_id" {
+  value       = "${aws_lb_listener.redirect_http_to_https.*.id}"
+  description = "The ARN of the HTTP listener of HTTPS redirection (matches arn)"
+}
+
+output "redirect_http_to_https_alb_listener_arn" {
+  value       = "${aws_lb_listener.redirect_http_to_https.*.arn}"
+  description = "The ARN of the HTTP listener of HTTPS redirection (matches id)"
+}
+
 output "alb_target_group_id" {
   value       = "${aws_lb_target_group.default.id}"
   description = "The ARN of the Target Group (matches arn)"

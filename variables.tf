@@ -72,6 +72,12 @@ variable "enable_http_listener" {
   description = "If true, the HTTP listener will be created."
 }
 
+variable "enable_redirect_http_to_https" {
+  default     = false
+  type        = "string"
+  description = "If true, the HTTP listener of HTTPS redirection will be created."
+}
+
 variable "ssl_policy" {
   default     = "ELBSecurityPolicy-2016-08"
   type        = "string"
