@@ -45,12 +45,12 @@ output "http_alb_listener_arn" {
 
 output "redirect_http_to_https_alb_listener_id" {
   value       = "${element(concat(aws_lb_listener.redirect_http_to_https.*.id, list("")), 0)}"
-  description = "The ARN of the HTTP listener of HTTPS redirection (matches arn)"
+  description = "The ARN of the HTTP listener of HTTPS redirect (matches arn)"
 }
 
 output "redirect_http_to_https_alb_listener_arn" {
   value       = "${element(concat(aws_lb_listener.redirect_http_to_https.*.arn, list("")), 0)}"
-  description = "The ARN of the HTTP listener of HTTPS redirection (matches id)"
+  description = "The ARN of the HTTP listener of HTTPS redirect (matches id)"
 }
 
 output "alb_target_group_id" {
