@@ -155,14 +155,14 @@ module "alb" {
 | https_alb_listener_id                   | The ARN of the HTTPS listener (matches arn)                                                |
 | redirect_http_to_https_alb_listener_arn | The ARN of the HTTP listener of HTTPS redirect (matches id)                                |
 | redirect_http_to_https_alb_listener_id  | The ARN of the HTTP listener of HTTPS redirect (matches arn)                               |
-| security_group_arn                      | The ARN of the security group.                                                             |
-| security_group_description              | The description of the security group.                                                     |
-| security_group_egress                   | The egress rules.                                                                          |
-| security_group_id                       | The ID of the security group.                                                              |
-| security_group_ingress                  | The ingress rules.                                                                         |
-| security_group_name                     | The name of the security group.                                                            |
-| security_group_owner_id                 | The owner ID.                                                                              |
-| security_group_vpc_id                   | The VPC ID.                                                                                |
+| security_group_arn                      | The ARN of the alb security group.                                                         |
+| security_group_description              | The description of the alb security group.                                                 |
+| security_group_egress                   | The egress rules of the alb security group.                                                |
+| security_group_id                       | The ID of the alb security group.                                                          |
+| security_group_ingress                  | The ingress rules of the alb security group.                                               |
+| security_group_name                     | The name of the alb security group.                                                        |
+| security_group_owner_id                 | The owner ID of the alb security group.                                                    |
+| security_group_vpc_id                   | The VPC ID of the alb security group.                                                      |
 
 ## Development
 

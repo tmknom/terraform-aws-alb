@@ -75,40 +75,40 @@ output "alb_target_group_name" {
 
 output "security_group_id" {
   value       = "${aws_security_group.default.id}"
-  description = "The ID of the security group."
+  description = "The ID of the alb security group."
 }
 
 output "security_group_arn" {
   value       = "${aws_security_group.default.arn}"
-  description = "The ARN of the security group."
+  description = "The ARN of the alb security group."
 }
 
 output "security_group_vpc_id" {
   value       = "${aws_security_group.default.vpc_id}"
-  description = "The VPC ID."
+  description = "The VPC ID of the alb security group."
 }
 
 output "security_group_owner_id" {
   value       = "${aws_security_group.default.owner_id}"
-  description = "The owner ID."
+  description = "The owner ID of the alb security group."
 }
 
 output "security_group_name" {
   value       = "${aws_security_group.default.name}"
-  description = "The name of the security group."
+  description = "The name of the alb security group."
 }
 
 output "security_group_description" {
   value       = "${aws_security_group.default.description}"
-  description = "The description of the security group."
+  description = "The description of the alb security group."
 }
 
 output "security_group_ingress" {
   value       = "${aws_security_group.default.ingress}"
-  description = "The ingress rules."
+  description = "The ingress rules of the alb security group."
 }
 
 output "security_group_egress" {
   value       = "${aws_security_group.default.egress}"
-  description = "The egress rules."
+  description = "The egress rules of the alb security group."
 }
