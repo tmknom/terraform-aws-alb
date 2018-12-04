@@ -223,10 +223,14 @@ resource "aws_lb_target_group" "default" {
 # Doing so will cause a conflict of rule settings and will overwrite rules.
 # https://www.terraform.io/docs/providers/aws/r/security_group.html
 resource "aws_security_group" "default" {
-  name   = "${var.name}-alb"
+  name   = "${local.security_group_name}"
   vpc_id = "${var.vpc_id}"
 
-  tags = "${merge(map("Name", var.name), var.tags)}"
+  tags = "${merge(map("Name", local.security_group_name), var.tags)}"
+}
+
+locals {
+  security_group_name = "${var.name}-alb"
 }
 
 # https://www.terraform.io/docs/providers/aws/r/security_group_rule.html
