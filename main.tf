@@ -243,6 +243,23 @@ resource "aws_lb_listener_rule" "https" {
   }
 }
 
+resource "aws_lb_listener_rule" "http" {
+  count = "${var.enable_http_listener && !(var.enable_https_listener && var.enable_redirect_http_to_https_listener) ? 1 : 0}"
+
+  listener_arn = "${aws_lb_listener.http.arn}"
+  priority     = "${var.listener_rule_priority}"
+
+  action {
+    type             = "forward"
+    target_group_arn = "${aws_lb_target_group.default.arn}"
+  }
+
+  condition {
+    field  = "${var.listener_rule_condition_field}"
+    values = ["${var.listener_rule_condition_values}"]
+  }
+}
+
 # NOTE on Security Groups and Security Group Rules:
 # At this time you cannot use a Security Group with in-line rules in conjunction with any Security Group Rule resources.
 # Doing so will cause a conflict of rule settings and will overwrite rules.
