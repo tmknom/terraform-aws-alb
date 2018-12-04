@@ -198,6 +198,24 @@ variable "health_check_protocol" {
   description = "The protocol to use to connect with the target."
 }
 
+variable "listener_rule_priority" {
+  default     = 50000
+  type        = "string"
+  description = "The priority for the rule between 1 and 50000."
+}
+
+variable "listener_rule_condition_field" {
+  default     = "path-pattern"
+  type        = "string"
+  description = "The name of the field. Must be one of path-pattern for path based routing or host-header for host based routing."
+}
+
+variable "listener_rule_condition_values" {
+  default     = ["/*"]
+  type        = "list"
+  description = "The path patterns to match. A maximum of 1 can be defined."
+}
+
 variable "ingress_cidr_blocks" {
   default     = ["0.0.0.0/0"]
   type        = "list"
