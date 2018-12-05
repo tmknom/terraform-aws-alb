@@ -24,32 +24,32 @@ output "alb_zone_id" {
 }
 
 output "https_alb_listener_id" {
-  value       = "${element(concat(aws_lb_listener.https.*.id, list("")), 0)}"
+  value       = "${join("", aws_lb_listener.https.*.id)}"
   description = "The ARN of the HTTPS listener (matches arn)"
 }
 
 output "https_alb_listener_arn" {
-  value       = "${element(concat(aws_lb_listener.https.*.arn, list("")), 0)}"
+  value       = "${join("", aws_lb_listener.https.*.arn)}"
   description = "The ARN of the HTTPS listener (matches id)"
 }
 
 output "http_alb_listener_id" {
-  value       = "${element(concat(aws_lb_listener.http.*.id, list("")), 0)}"
+  value       = "${join("", aws_lb_listener.http.*.id)}"
   description = "The ARN of the HTTP listener (matches arn)"
 }
 
 output "http_alb_listener_arn" {
-  value       = "${element(concat(aws_lb_listener.http.*.arn, list("")), 0)}"
+  value       = "${join("", aws_lb_listener.http.*.arn)}"
   description = "The ARN of the HTTP listener (matches id)"
 }
 
 output "redirect_http_to_https_alb_listener_id" {
-  value       = "${element(concat(aws_lb_listener.redirect_http_to_https.*.id, list("")), 0)}"
+  value       = "${join("", aws_lb_listener.redirect_http_to_https.*.id)}"
   description = "The ARN of the HTTP listener of HTTPS redirect (matches arn)"
 }
 
 output "redirect_http_to_https_alb_listener_arn" {
-  value       = "${element(concat(aws_lb_listener.redirect_http_to_https.*.arn, list("")), 0)}"
+  value       = "${join("", aws_lb_listener.redirect_http_to_https.*.arn)}"
   description = "The ARN of the HTTP listener of HTTPS redirect (matches id)"
 }
 
@@ -74,22 +74,22 @@ output "alb_target_group_name" {
 }
 
 output "https_alb_listener_rule_id" {
-  value       = "${element(concat(aws_lb_listener_rule.https.*.id, list("")), 0)}"
+  value       = "${join("", aws_lb_listener_rule.https.*.id)}"
   description = "The ARN of the HTTPS rule (matches arn)"
 }
 
 output "https_alb_listener_rule_arn" {
-  value       = "${element(concat(aws_lb_listener_rule.https.*.arn, list("")), 0)}"
+  value       = "${join("", aws_lb_listener_rule.https.*.arn)}"
   description = "The ARN of the HTTPS rule (matches id)"
 }
 
 output "http_alb_listener_rule_id" {
-  value       = "${element(concat(aws_lb_listener_rule.http.*.id, list("")), 0)}"
+  value       = "${join("", aws_lb_listener_rule.http.*.id)}"
   description = "The ARN of the HTTP rule (matches arn)"
 }
 
 output "http_alb_listener_rule_arn" {
-  value       = "${element(concat(aws_lb_listener_rule.http.*.arn, list("")), 0)}"
+  value       = "${join("", aws_lb_listener_rule.http.*.arn)}"
   description = "The ARN of the HTTP rule (matches id)"
 }
 
