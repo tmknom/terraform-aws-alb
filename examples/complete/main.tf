@@ -38,6 +38,9 @@ module "alb" {
   health_check_matcher             = 200
   health_check_port                = "traffic-port"
   health_check_protocol            = "HTTP"
+  listener_rule_priority           = 1
+  listener_rule_condition_field    = "path-pattern"
+  listener_rule_condition_values   = ["/*"]
 
   tags = {
     Name        = "complete"

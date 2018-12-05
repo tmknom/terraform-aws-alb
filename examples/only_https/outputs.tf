@@ -58,6 +58,22 @@ output "alb_target_group_name" {
   value = "${module.alb.alb_target_group_name}"
 }
 
+output "https_alb_listener_rule_id" {
+  value = "${module.alb.https_alb_listener_rule_id}"
+}
+
+output "https_alb_listener_rule_arn" {
+  value = "${module.alb.https_alb_listener_rule_arn}"
+}
+
+output "http_alb_listener_rule_id" {
+  value = "${module.alb.http_alb_listener_rule_id}"
+}
+
+output "http_alb_listener_rule_arn" {
+  value = "${module.alb.http_alb_listener_rule_arn}"
+}
+
 output "security_group_id" {
   value = "${module.alb.security_group_id}"
 }
