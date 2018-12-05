@@ -73,6 +73,11 @@ output "alb_target_group_name" {
   description = "The name of the Target Group."
 }
 
+output "alb_target_group_port" {
+  value       = "${aws_lb_target_group.default.port}"
+  description = "The port of the Target Group."
+}
+
 output "https_alb_listener_rule_id" {
   value       = "${join("", aws_lb_listener_rule.https.*.id)}"
   description = "The ARN of the HTTPS rule (matches arn)"
