@@ -241,6 +241,12 @@ resource "aws_lb_listener_rule" "https" {
     field  = "${var.listener_rule_condition_field}"
     values = ["${var.listener_rule_condition_values}"]
   }
+
+  # Changing the priority causes forces new resource, then network outage may occur.
+  # So, specify resources are created before destroyed.
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_lb_listener_rule" "http" {
@@ -257,6 +263,10 @@ resource "aws_lb_listener_rule" "http" {
   condition {
     field  = "${var.listener_rule_condition_field}"
     values = ["${var.listener_rule_condition_values}"]
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 }
 
