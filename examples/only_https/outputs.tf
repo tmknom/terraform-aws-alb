@@ -58,6 +58,10 @@ output "alb_target_group_name" {
   value = "${module.alb.alb_target_group_name}"
 }
 
+output "alb_target_group_port" {
+  value = "${module.alb.alb_target_group_port}"
+}
+
 output "https_alb_listener_rule_id" {
   value = "${module.alb.https_alb_listener_rule_id}"
 }
