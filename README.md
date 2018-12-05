@@ -80,6 +80,9 @@ module "alb" {
   health_check_matcher             = 200
   health_check_port                = "traffic-port"
   health_check_protocol            = "HTTP"
+  listener_rule_priority           = 1
+  listener_rule_condition_field    = "path-pattern"
+  listener_rule_condition_values   = ["/*"]
 
   tags = {
     Name        = "complete"
@@ -129,6 +132,9 @@ module "alb" {
 | ingress_cidr_blocks                    | List of Ingress CIDR blocks.                                                                                                                |  list  |      `[ "0.0.0.0/0" ]`      |    no    |
 | internal                               | If true, the LB will be internal.                                                                                                           | string |           `false`           |    no    |
 | ip_address_type                        | The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 and dualstack.                            | string |           `ipv4`            |    no    |
+| listener_rule_condition_field          | The name of the field. Must be one of path-pattern for path based routing or host-header for host based routing.                            | string |       `path-pattern`        |    no    |
+| listener_rule_condition_values         | The path patterns to match. A maximum of 1 can be defined.                                                                                  |  list  |         `[ "/*" ]`          |    no    |
+| listener_rule_priority                 | The priority for the rule between 1 and 50000.                                                                                              | string |           `50000`           |    no    |
 | slow_start                             | The amount time for targets to warm up before the load balancer sends them a full share of requests.                                        | string |             `0`             |    no    |
 | ssl_policy                             | The name of the SSL Policy for the listener. Required if protocol is HTTPS.                                                                 | string | `ELBSecurityPolicy-2016-08` |    no    |
 | tags                                   | A mapping of tags to assign to all resources.                                                                                               |  map   |            `{}`             |    no    |
@@ -151,8 +157,12 @@ module "alb" {
 | alb_zone_id                             | The canonical hosted zone ID of the load balancer (to be used in a Route 53 Alias record). |
 | http_alb_listener_arn                   | The ARN of the HTTP listener (matches id)                                                  |
 | http_alb_listener_id                    | The ARN of the HTTP listener (matches arn)                                                 |
+| http_alb_listener_rule_arn              | The ARN of the HTTP rule (matches id)                                                      |
+| http_alb_listener_rule_id               | The ARN of the HTTP rule (matches arn)                                                     |
 | https_alb_listener_arn                  | The ARN of the HTTPS listener (matches id)                                                 |
 | https_alb_listener_id                   | The ARN of the HTTPS listener (matches arn)                                                |
+| https_alb_listener_rule_arn             | The ARN of the HTTPS rule (matches id)                                                     |
+| https_alb_listener_rule_id              | The ARN of the HTTPS rule (matches arn)                                                    |
 | redirect_http_to_https_alb_listener_arn | The ARN of the HTTP listener of HTTPS redirect (matches id)                                |
 | redirect_http_to_https_alb_listener_id  | The ARN of the HTTP listener of HTTPS redirect (matches arn)                               |
 | security_group_arn                      | The ARN of the alb security group.                                                         |

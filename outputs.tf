@@ -73,6 +73,26 @@ output "alb_target_group_name" {
   description = "The name of the Target Group."
 }
 
+output "https_alb_listener_rule_id" {
+  value       = "${element(concat(aws_lb_listener_rule.https.*.id, list("")), 0)}"
+  description = "The ARN of the HTTPS rule (matches arn)"
+}
+
+output "https_alb_listener_rule_arn" {
+  value       = "${element(concat(aws_lb_listener_rule.https.*.arn, list("")), 0)}"
+  description = "The ARN of the HTTPS rule (matches id)"
+}
+
+output "http_alb_listener_rule_id" {
+  value       = "${element(concat(aws_lb_listener_rule.http.*.id, list("")), 0)}"
+  description = "The ARN of the HTTP rule (matches arn)"
+}
+
+output "http_alb_listener_rule_arn" {
+  value       = "${element(concat(aws_lb_listener_rule.http.*.arn, list("")), 0)}"
+  description = "The ARN of the HTTP rule (matches id)"
+}
+
 output "security_group_id" {
   value       = "${aws_security_group.default.id}"
   description = "The ID of the alb security group."

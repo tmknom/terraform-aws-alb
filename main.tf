@@ -218,6 +218,58 @@ resource "aws_lb_target_group" "default" {
   tags = "${var.tags}"
 }
 
+# Each rule has a priority. Rules are evaluated in priority order, from the lowest value to the highest value.
+# The default rule is evaluated last. You can change the priority of a nondefault rule at any time.
+# https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rule-priority
+#
+# The priority for the rule between 1 and 50000.
+# Leaving it unset will automatically set the rule with next available priority after currently existing highest rule.
+# A listener can't have multiple rules with the same priority.
+# https://www.terraform.io/docs/providers/aws/r/lb_listener_rule.html
+resource "aws_lb_listener_rule" "https" {
+  count = "${var.enable_https_listener ? 1 : 0}"
+
+  listener_arn = "${aws_lb_listener.https.arn}"
+  priority     = "${var.listener_rule_priority}"
+
+  action {
+    type             = "forward"
+    target_group_arn = "${aws_lb_target_group.default.arn}"
+  }
+
+  condition {
+    field  = "${var.listener_rule_condition_field}"
+    values = ["${var.listener_rule_condition_values}"]
+  }
+
+  # Changing the priority causes forces new resource, then network outage may occur.
+  # So, specify resources are created before destroyed.
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_lb_listener_rule" "http" {
+  count = "${var.enable_http_listener && !(var.enable_https_listener && var.enable_redirect_http_to_https_listener) ? 1 : 0}"
+
+  listener_arn = "${aws_lb_listener.http.arn}"
+  priority     = "${var.listener_rule_priority}"
+
+  action {
+    type             = "forward"
+    target_group_arn = "${aws_lb_target_group.default.arn}"
+  }
+
+  condition {
+    field  = "${var.listener_rule_condition_field}"
+    values = ["${var.listener_rule_condition_values}"]
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
 # NOTE on Security Groups and Security Group Rules:
 # At this time you cannot use a Security Group with in-line rules in conjunction with any Security Group Rule resources.
 # Doing so will cause a conflict of rule settings and will overwrite rules.
