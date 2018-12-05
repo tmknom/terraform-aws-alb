@@ -154,6 +154,7 @@ module "alb" {
 | alb_target_group_arn_suffix             | The ARN suffix for use with CloudWatch Metrics.                                            |
 | alb_target_group_id                     | The ARN of the Target Group (matches arn)                                                  |
 | alb_target_group_name                   | The name of the Target Group.                                                              |
+| alb_target_group_port                   | The port of the Target Group.                                                              |
 | alb_zone_id                             | The canonical hosted zone ID of the load balancer (to be used in a Route 53 Alias record). |
 | http_alb_listener_arn                   | The ARN of the HTTP listener (matches id)                                                  |
 | http_alb_listener_id                    | The ARN of the HTTP listener (matches arn)                                                 |
