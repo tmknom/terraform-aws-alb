@@ -5,6 +5,9 @@ module "alb" {
   subnets            = ["${module.vpc.public_subnet_ids}"]
   access_logs_bucket = "${module.s3_lb_log.s3_bucket_id}"
   certificate_arn    = "${module.certificate.acm_certificate_arn}"
+
+  # WARNING: If in production environment, you should delete this parameter or change to true.
+  enable_deletion_protection = false
 }
 
 module "certificate" {

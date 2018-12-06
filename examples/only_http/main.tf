@@ -7,6 +7,9 @@ module "alb" {
 
   # NOTE: You can provision only HTTP, if enable_https_listener is set to false.
   enable_https_listener = false
+
+  # WARNING: If in production environment, you should delete this parameter or change to true.
+  enable_deletion_protection = false
 }
 
 module "vpc" {
