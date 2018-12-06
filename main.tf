@@ -216,6 +216,14 @@ resource "aws_lb_target_group" "default" {
 
   # A mapping of tags to assign to the resource.
   tags = "${var.tags}"
+
+  # LB Target Group resource not requires Load Balancer.
+  # On the other hand, ECS Service resource requires LB Target Group that has an associated Load Balancer.
+  #
+  # Therefore, if creating ECS Service and LB Target Group at the same time which may occurs error.
+  # That's because LB Target Group has not yet been associated Load Balancer.
+  # To avoid this problem, force the creation of LB Target Group to be after the creation of Load Balancer.
+  depends_on = ["aws_lb.default"]
 }
 
 # Each rule has a priority. Rules are evaluated in priority order, from the lowest value to the highest value.
