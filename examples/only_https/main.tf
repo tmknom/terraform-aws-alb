@@ -8,6 +8,9 @@ module "alb" {
 
   # NOTE: You can provision only HTTPS, if enable_http_listener is set to false.
   enable_http_listener = false
+
+  # WARNING: If in production environment, you should delete this parameter or change to true.
+  enable_deletion_protection = false
 }
 
 module "certificate" {

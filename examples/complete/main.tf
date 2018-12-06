@@ -12,7 +12,6 @@ module "alb" {
 
   internal                    = false
   idle_timeout                = 120
-  enable_deletion_protection  = false
   enable_http2                = false
   ip_address_type             = "ipv4"
   access_logs_prefix          = "test"
@@ -46,6 +45,9 @@ module "alb" {
     Name        = "complete"
     Environment = "prod"
   }
+
+  # WARNING: If in production environment, you should delete this parameter or change to true.
+  enable_deletion_protection = false
 }
 
 module "certificate" {
