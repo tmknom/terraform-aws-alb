@@ -8,6 +8,8 @@
 
 # https://www.terraform.io/docs/providers/aws/r/lb.html
 resource "aws_lb" "default" {
+  count = "${var.enabled}"
+
   load_balancer_type = "application"
 
   # The name of your ALB must be unique within your set of ALBs and NLBs for the region,
@@ -67,7 +69,7 @@ resource "aws_lb" "default" {
 #
 # https://www.terraform.io/docs/providers/aws/r/lb_listener.html
 resource "aws_lb_listener" "https" {
-  count = "${var.enable_https_listener ? 1 : 0}"
+  count = "${local.enable_https_listener ? 1 : 0}"
 
   load_balancer_arn = "${aws_lb.default.arn}"
   port              = "${var.https_port}"
@@ -100,7 +102,7 @@ resource "aws_lb_listener" "https" {
 }
 
 resource "aws_lb_listener" "http" {
-  count = "${var.enable_http_listener && !(var.enable_https_listener && var.enable_redirect_http_to_https_listener) ? 1 : 0}"
+  count = "${local.enable_http_listener ? 1 : 0}"
 
   load_balancer_arn = "${aws_lb.default.arn}"
   port              = "${var.http_port}"
@@ -120,7 +122,7 @@ resource "aws_lb_listener" "http" {
 }
 
 resource "aws_lb_listener" "redirect_http_to_https" {
-  count = "${var.enable_http_listener && (var.enable_https_listener && var.enable_redirect_http_to_https_listener) ? 1 : 0}"
+  count = "${local.enable_redirect_http_to_https_listener ? 1 : 0}"
 
   load_balancer_arn = "${aws_lb.default.arn}"
   port              = "${var.http_port}"
@@ -141,6 +143,8 @@ resource "aws_lb_listener" "redirect_http_to_https" {
 }
 
 resource "aws_lb_target_group" "default" {
+  count = "${var.enabled}"
+
   name   = "${var.name}"
   vpc_id = "${var.vpc_id}"
 
@@ -235,7 +239,7 @@ resource "aws_lb_target_group" "default" {
 # A listener can't have multiple rules with the same priority.
 # https://www.terraform.io/docs/providers/aws/r/lb_listener_rule.html
 resource "aws_lb_listener_rule" "https" {
-  count = "${var.enable_https_listener ? 1 : 0}"
+  count = "${local.enable_https_listener ? 1 : 0}"
 
   listener_arn = "${aws_lb_listener.https.arn}"
   priority     = "${var.listener_rule_priority}"
@@ -258,7 +262,7 @@ resource "aws_lb_listener_rule" "https" {
 }
 
 resource "aws_lb_listener_rule" "http" {
-  count = "${var.enable_http_listener && !(var.enable_https_listener && var.enable_redirect_http_to_https_listener) ? 1 : 0}"
+  count = "${local.enable_http_listener ? 1 : 0}"
 
   listener_arn = "${aws_lb_listener.http.arn}"
   priority     = "${var.listener_rule_priority}"
@@ -283,6 +287,8 @@ resource "aws_lb_listener_rule" "http" {
 # Doing so will cause a conflict of rule settings and will overwrite rules.
 # https://www.terraform.io/docs/providers/aws/r/security_group.html
 resource "aws_security_group" "default" {
+  count = "${var.enabled}"
+
   name   = "${local.security_group_name}"
   vpc_id = "${var.vpc_id}"
 
@@ -295,7 +301,7 @@ locals {
 
 # https://www.terraform.io/docs/providers/aws/r/security_group_rule.html
 resource "aws_security_group_rule" "ingress_https" {
-  count = "${var.enable_https_listener ? 1 : 0}"
+  count = "${local.enable_https_listener ? 1 : 0}"
 
   type              = "ingress"
   from_port         = "${var.https_port}"
@@ -306,7 +312,7 @@ resource "aws_security_group_rule" "ingress_https" {
 }
 
 resource "aws_security_group_rule" "ingress_http" {
-  count = "${var.enable_http_listener ? 1 : 0}"
+  count = "${local.enable_http_listener ? 1 : 0}"
 
   type              = "ingress"
   from_port         = "${var.http_port}"
@@ -317,10 +323,18 @@ resource "aws_security_group_rule" "ingress_http" {
 }
 
 resource "aws_security_group_rule" "egress" {
+  count = "${var.enabled}"
+
   type              = "egress"
   from_port         = 0
   to_port           = 0
   protocol          = "-1"
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = "${aws_security_group.default.id}"
+}
+
+locals {
+  enable_https_listener                  = "${var.enabled && var.enable_https_listener}"
+  enable_http_listener                   = "${var.enabled && var.enable_http_listener && !(var.enable_https_listener && var.enable_redirect_http_to_https_listener)}"
+  enable_redirect_http_to_https_listener = "${var.enabled && var.enable_http_listener && (var.enable_https_listener && var.enable_redirect_http_to_https_listener)}"
 }
