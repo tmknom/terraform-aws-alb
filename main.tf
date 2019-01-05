@@ -312,7 +312,7 @@ resource "aws_security_group_rule" "ingress_https" {
 }
 
 resource "aws_security_group_rule" "ingress_http" {
-  count = "${local.enable_http_listener ? 1 : 0}"
+  count = "${var.enabled && var.enable_http_listener ? 1 : 0}"
 
   type              = "ingress"
   from_port         = "${var.http_port}"
