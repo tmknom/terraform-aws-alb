@@ -83,6 +83,7 @@ module "alb" {
   listener_rule_priority           = 1
   listener_rule_condition_field    = "path-pattern"
   listener_rule_condition_values   = ["/*"]
+  enabled                          = true
 
   tags = {
     Name        = "complete"
@@ -115,6 +116,7 @@ module "alb" {
 | enable_http_listener                   | If true, the HTTP listener will be created.                                                                                                 | string |           `true`            |    no    |
 | enable_https_listener                  | If true, the HTTPS listener will be created.                                                                                                | string |           `true`            |    no    |
 | enable_redirect_http_to_https_listener | If true, the HTTP listener of HTTPS redirect will be created.                                                                               | string |           `true`            |    no    |
+| enabled                                | Set to false to prevent the module from creating anything.                                                                                  | string |           `true`            |    no    |
 | fixed_response_content_type            | The content type. Valid values are text/plain, text/css, text/html, application/javascript and application/json.                            | string |        `text/plain`         |    no    |
 | fixed_response_message_body            | The message body.                                                                                                                           | string |       `404 Not Found`       |    no    |
 | fixed_response_status_code             | The HTTP response code. Valid values are 2XX, 4XX, or 5XX.                                                                                  | string |            `404`            |    no    |
