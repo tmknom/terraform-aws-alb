@@ -40,6 +40,7 @@ module "alb" {
   listener_rule_priority           = 1
   listener_rule_condition_field    = "path-pattern"
   listener_rule_condition_values   = ["/*"]
+  enabled                          = true
 
   tags = {
     Name        = "complete"

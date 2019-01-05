@@ -1,25 +1,25 @@
 output "alb_id" {
-  value       = "${aws_lb.default.id}"
+  value       = "${join("", aws_lb.default.*.id)}"
   description = "The ARN of the load balancer (matches arn)."
 }
 
 output "alb_arn" {
-  value       = "${aws_lb.default.arn}"
+  value       = "${join("", aws_lb.default.*.arn)}"
   description = "The ARN of the load balancer (matches id)."
 }
 
 output "alb_arn_suffix" {
-  value       = "${aws_lb.default.arn_suffix}"
+  value       = "${join("", aws_lb.default.*.arn_suffix)}"
   description = "The ARN suffix for use with CloudWatch Metrics."
 }
 
 output "alb_dns_name" {
-  value       = "${aws_lb.default.dns_name}"
+  value       = "${join("", aws_lb.default.*.dns_name)}"
   description = "The DNS name of the load balancer."
 }
 
 output "alb_zone_id" {
-  value       = "${aws_lb.default.zone_id}"
+  value       = "${join("", aws_lb.default.*.zone_id)}"
   description = "The canonical hosted zone ID of the load balancer (to be used in a Route 53 Alias record)."
 }
 
@@ -54,27 +54,27 @@ output "redirect_http_to_https_alb_listener_arn" {
 }
 
 output "alb_target_group_id" {
-  value       = "${aws_lb_target_group.default.id}"
+  value       = "${join("", aws_lb_target_group.default.*.id)}"
   description = "The ARN of the Target Group (matches arn)"
 }
 
 output "alb_target_group_arn" {
-  value       = "${aws_lb_target_group.default.arn}"
+  value       = "${join("", aws_lb_target_group.default.*.arn)}"
   description = "The ARN of the Target Group (matches id)"
 }
 
 output "alb_target_group_arn_suffix" {
-  value       = "${aws_lb_target_group.default.arn_suffix}"
+  value       = "${join("", aws_lb_target_group.default.*.arn_suffix)}"
   description = "The ARN suffix for use with CloudWatch Metrics."
 }
 
 output "alb_target_group_name" {
-  value       = "${aws_lb_target_group.default.name}"
+  value       = "${join("", aws_lb_target_group.default.*.name)}"
   description = "The name of the Target Group."
 }
 
 output "alb_target_group_port" {
-  value       = "${aws_lb_target_group.default.port}"
+  value       = "${join("", aws_lb_target_group.default.*.port)}"
   description = "The port of the Target Group."
 }
 
@@ -99,41 +99,41 @@ output "http_alb_listener_rule_arn" {
 }
 
 output "security_group_id" {
-  value       = "${aws_security_group.default.id}"
+  value       = "${join("", aws_security_group.default.*.id)}"
   description = "The ID of the alb security group."
 }
 
 output "security_group_arn" {
-  value       = "${aws_security_group.default.arn}"
+  value       = "${join("", aws_security_group.default.*.arn)}"
   description = "The ARN of the alb security group."
 }
 
 output "security_group_vpc_id" {
-  value       = "${aws_security_group.default.vpc_id}"
+  value       = "${join("", aws_security_group.default.*.vpc_id)}"
   description = "The VPC ID of the alb security group."
 }
 
 output "security_group_owner_id" {
-  value       = "${aws_security_group.default.owner_id}"
+  value       = "${join("", aws_security_group.default.*.owner_id)}"
   description = "The owner ID of the alb security group."
 }
 
 output "security_group_name" {
-  value       = "${aws_security_group.default.name}"
+  value       = "${join("", aws_security_group.default.*.name)}"
   description = "The name of the alb security group."
 }
 
 output "security_group_description" {
-  value       = "${aws_security_group.default.description}"
+  value       = "${join("", aws_security_group.default.*.description)}"
   description = "The description of the alb security group."
 }
 
 output "security_group_ingress" {
-  value       = "${aws_security_group.default.ingress}"
+  value       = "${aws_security_group.default.*.ingress}"
   description = "The ingress rules of the alb security group."
 }
 
 output "security_group_egress" {
-  value       = "${aws_security_group.default.egress}"
+  value       = "${aws_security_group.default.*.egress}"
   description = "The egress rules of the alb security group."
 }
