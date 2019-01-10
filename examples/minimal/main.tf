@@ -19,7 +19,7 @@ module "certificate" {
 module "vpc" {
   source                    = "git::https://github.com/tmknom/terraform-aws-vpc.git?ref=tags/1.0.0"
   cidr_block                = "${local.cidr_block}"
-  name                      = "vpc-alb"
+  name                      = "alb"
   public_subnet_cidr_blocks = ["${cidrsubnet(local.cidr_block, 8, 0)}", "${cidrsubnet(local.cidr_block, 8, 1)}"]
   public_availability_zones = ["${data.aws_availability_zones.available.names}"]
 }
