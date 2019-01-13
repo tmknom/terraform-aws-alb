@@ -27,7 +27,7 @@ resource "aws_lb" "default" {
   # https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html#load-balancer-security-groups
   security_groups = ["${aws_security_group.default.id}"]
 
-  # A list of subnet IDs to attach to theA LB.
+  # A list of subnet IDs to attach to the ALB.
   subnets = ["${var.subnets}"]
 
   # The time in seconds that the connection is allowed to be idle.
