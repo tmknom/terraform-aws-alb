@@ -8,7 +8,7 @@
 
 # https://www.terraform.io/docs/providers/aws/r/lb.html
 resource "aws_lb" "default" {
-  count = var.enabled
+  count = var.enabled ? 1 : 0
 
   load_balancer_type = "application"
 
@@ -143,7 +143,7 @@ resource "aws_lb_listener" "redirect_http_to_https" {
 }
 
 resource "aws_lb_target_group" "default" {
-  count = var.enabled
+  count = var.enabled ? 1 : 0
 
   name   = var.name
   vpc_id = var.vpc_id
@@ -287,7 +287,7 @@ resource "aws_lb_listener_rule" "http" {
 # Doing so will cause a conflict of rule settings and will overwrite rules.
 # https://www.terraform.io/docs/providers/aws/r/security_group.html
 resource "aws_security_group" "default" {
-  count = var.enabled
+  count = var.enabled ? 1 : 0
 
   name   = local.security_group_name
   vpc_id = var.vpc_id
@@ -312,7 +312,7 @@ resource "aws_security_group_rule" "ingress_https" {
 }
 
 resource "aws_security_group_rule" "ingress_http" {
-  count = var.enabled && var.enable_http_listener ? 1 : 0
+  count = var.enabled ? 1 : 0 && var.enable_http_listener ? 1 : 0
 
   type              = "ingress"
   from_port         = var.http_port
@@ -323,7 +323,7 @@ resource "aws_security_group_rule" "ingress_http" {
 }
 
 resource "aws_security_group_rule" "egress" {
-  count = var.enabled
+  count = var.enabled ? 1 : 0
 
   type              = "egress"
   from_port         = 0
