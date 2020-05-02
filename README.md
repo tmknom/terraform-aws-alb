@@ -210,27 +210,27 @@ make install
 ### Makefile targets
 
 ```text
+apply-complete                 Run terraform apply examples/complete
+apply-minimal                  Run terraform apply examples/minimal
+apply-only-http                Run terraform apply examples/only_http
+apply-only-https               Run terraform apply examples/only_https
 check-format                   Check format code
-cibuild                        Execute CI build
 clean                          Clean .terraform
+destroy-complete               Run terraform destroy examples/complete
+destroy-minimal                Run terraform destroy examples/minimal
+destroy-only-http              Run terraform destroy examples/only_http
+destroy-only-https             Run terraform destroy examples/only_https
+diff                           Word diff
 docs                           Generate docs
 format                         Format code
 help                           Show help
 install                        Install requirements
 lint                           Lint code
+plan-complete                  Run terraform plan examples/complete
+plan-minimal                   Run terraform plan examples/minimal
+plan-only-http                 Run terraform plan examples/only_http
+plan-only-https                Run terraform plan examples/only_https
 release                        Release GitHub and Terraform Module Registry
-terraform-apply-complete       Run terraform apply examples/complete
-terraform-apply-minimal        Run terraform apply examples/minimal
-terraform-apply-only-http      Run terraform apply examples/only_http
-terraform-apply-only-https     Run terraform apply examples/only_https
-terraform-destroy-complete     Run terraform destroy examples/complete
-terraform-destroy-minimal      Run terraform destroy examples/minimal
-terraform-destroy-only-http    Run terraform destroy examples/only_http
-terraform-destroy-only-https   Run terraform destroy examples/only_https
-terraform-plan-complete        Run terraform plan examples/complete
-terraform-plan-minimal         Run terraform plan examples/minimal
-terraform-plan-only-http       Run terraform plan examples/only_http
-terraform-plan-only-https      Run terraform plan examples/only_https
 upgrade                        Upgrade makefile
 ```
 
