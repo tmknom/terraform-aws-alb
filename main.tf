@@ -335,6 +335,6 @@ resource "aws_security_group_rule" "egress" {
 
 locals {
   enable_https_listener                  = var.enabled && var.enable_https_listener
-  enable_http_listener                   = var.enabled && var.enable_http_listener && !(var.enable_https_listener && var.enable_redirect_http_to_https_listener)
+  enable_http_listener                   = var.enabled && var.enable_http_listener && ! (var.enable_https_listener && var.enable_redirect_http_to_https_listener)
   enable_redirect_http_to_https_listener = var.enabled && var.enable_http_listener && (var.enable_https_listener && var.enable_redirect_http_to_https_listener)
 }
