@@ -28,12 +28,12 @@ This module provides recommended settings:
 
 ```hcl
 module "alb" {
-  source             = "git::https://github.com/tmknom/terraform-aws-alb.git?ref=tags/1.5.1"
+  source             = "git::https://github.com/tmknom/terraform-aws-alb.git?ref=tags/2.0.0"
   name               = "minimal"
-  vpc_id             = "${var.vpc_id}"
-  subnets            = ["${var.subnets}"]
+  vpc_id             = var.vpc_id
+  subnets            = var.subnets
   access_logs_bucket = "s3-lb-log"
-  certificate_arn    = "${var.certificate_arn}"
+  certificate_arn    = var.certificate_arn
 }
 ```
 
@@ -41,12 +41,12 @@ module "alb" {
 
 ```hcl
 module "alb" {
-  source             = "git::https://github.com/tmknom/terraform-aws-alb.git?ref=tags/1.5.1"
+  source             = "git::https://github.com/tmknom/terraform-aws-alb.git?ref=tags/2.0.0"
   name               = "complete"
-  vpc_id             = "${var.vpc_id}"
-  subnets            = ["${var.subnets}"]
+  vpc_id             = var.vpc_id
+  subnets            = var.subnets
   access_logs_bucket = "s3-lb-log"
-  certificate_arn    = "${var.certificate_arn}"
+  certificate_arn    = var.certificate_arn
 
   enable_https_listener                  = true
   enable_http_listener                   = true
