@@ -129,11 +129,11 @@ output "security_group_description" {
 }
 
 output "security_group_ingress" {
-  value       = aws_security_group.default.*.ingress
+  value       = flatten(aws_security_group.default.*.ingress)
   description = "The ingress rules of the alb security group."
 }
 
 output "security_group_egress" {
-  value       = aws_security_group.default.*.egress
+  value       = flatten(aws_security_group.default.*.egress)
   description = "The egress rules of the alb security group."
 }
