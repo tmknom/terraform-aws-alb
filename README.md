@@ -68,7 +68,7 @@ module "alb" {
   fixed_response_content_type = "text/plain"
   fixed_response_message_body = "ok"
   fixed_response_status_code  = "200"
-  ingress_cidr_blocks         = ["0.0.0.0/0"]
+  source_cidr_blocks          = ["0.0.0.0/0"]
 
   target_group_port                = 8080
   target_group_protocol            = "HTTP"
@@ -148,13 +148,13 @@ module "alb" {
 | http_port                              | The HTTP port.                                                                                                                              | `string`       | `80`                              |    no    |
 | https_port                             | The HTTPS port.                                                                                                                             | `string`       | `443`                             |    no    |
 | idle_timeout                           | The time in seconds that the connection is allowed to be idle.                                                                              | `string`       | `60`                              |    no    |
-| ingress_cidr_blocks                    | List of Ingress CIDR blocks.                                                                                                                | `list(string)` | <pre>[<br> "0.0.0.0/0"<br>]</pre> |    no    |
 | internal                               | If true, the LB will be internal.                                                                                                           | `string`       | `false`                           |    no    |
 | ip_address_type                        | The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 and dualstack.                            | `string`       | `"ipv4"`                          |    no    |
 | listener_rule_condition_field          | The name of the field. Must be one of path-pattern for path based routing or host-header for host based routing.                            | `string`       | `"path-pattern"`                  |    no    |
 | listener_rule_condition_values         | The path patterns to match. A maximum of 1 can be defined.                                                                                  | `list(string)` | <pre>[<br> "/*"<br>]</pre>        |    no    |
 | listener_rule_priority                 | The priority for the rule between 1 and 50000.                                                                                              | `string`       | `50000`                           |    no    |
 | slow_start                             | The amount time for targets to warm up before the load balancer sends them a full share of requests.                                        | `string`       | `"0"`                             |    no    |
+| source_cidr_blocks                     | List of source CIDR blocks.                                                                                                                 | `list(string)` | <pre>[<br> "0.0.0.0/0"<br>]</pre> |    no    |
 | ssl_policy                             | The name of the SSL Policy for the listener. Required if protocol is HTTPS.                                                                 | `string`       | `"ELBSecurityPolicy-2016-08"`     |    no    |
 | tags                                   | A mapping of tags to assign to all resources.                                                                                               | `map(string)`  | `{}`                              |    no    |
 | target_group_port                      | The port on which targets receive traffic, unless overridden when registering a specific target.                                            | `string`       | `"80"`                            |    no    |

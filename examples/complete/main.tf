@@ -22,7 +22,7 @@ module "alb" {
   fixed_response_content_type = "text/plain"
   fixed_response_message_body = "ok"
   fixed_response_status_code  = "200"
-  ingress_cidr_blocks         = ["0.0.0.0/0"]
+  source_cidr_blocks          = ["0.0.0.0/0"]
 
   target_group_port                = 80
   target_group_protocol            = "HTTP"
