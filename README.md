@@ -31,7 +31,7 @@ This module provides recommended settings:
 
 ```hcl
 module "alb" {
-  source             = "git::https://github.com/tmknom/terraform-aws-alb.git?ref=tags/2.0.0"
+  source             = "git::https://github.com/tmknom/terraform-aws-alb.git?ref=tags/2.1.0"
   name               = "minimal"
   vpc_id             = var.vpc_id
   subnets            = var.subnets
@@ -44,7 +44,7 @@ module "alb" {
 
 ```hcl
 module "alb" {
-  source             = "git::https://github.com/tmknom/terraform-aws-alb.git?ref=tags/2.0.0"
+  source             = "git::https://github.com/tmknom/terraform-aws-alb.git?ref=tags/2.1.0"
   name               = "complete"
   vpc_id             = var.vpc_id
   subnets            = var.subnets
