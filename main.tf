@@ -307,7 +307,7 @@ resource "aws_security_group_rule" "ingress_https" {
   from_port         = var.https_port
   to_port           = var.https_port
   protocol          = "tcp"
-  cidr_blocks       = var.ingress_cidr_blocks
+  cidr_blocks       = var.source_cidr_blocks
   security_group_id = aws_security_group.default[0].id
 }
 
@@ -318,7 +318,7 @@ resource "aws_security_group_rule" "ingress_http" {
   from_port         = var.http_port
   to_port           = var.http_port
   protocol          = "tcp"
-  cidr_blocks       = var.ingress_cidr_blocks
+  cidr_blocks       = var.source_cidr_blocks
   security_group_id = aws_security_group.default[0].id
 }
 
